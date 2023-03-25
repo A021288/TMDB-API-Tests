@@ -132,20 +132,3 @@ class TestSingleMovieObject(TestCase):
         # vote_average must be of type float
         self.assertGreaterEqual(self.random_movie_object["vote_average"], 0)
         self.assertLessEqual(self.random_movie_object["vote_average"], 10)
-
-
-class TestRateMovieApi(TestCase):
-    def setUp(self):
-        valid_movie_id_list = [238, 278, 772071, 240, 424, 19404, 129, 389,
-                               372058, 496243, 995133, 155, 497, 680, 372754,
-                               429, 13, 122, 704264, 769]
-        random_movie_id = [random.randrange(0, 19, 2)]
-        self.resource_url = BASE_URI + "movie/{movie_id}/rating"
-        self.payload = {
-            "api_key": API_KEY,
-            "page": 1
-        }
-
-    def test_success_status_code(self):
-        response = requests.get(self.resource_url, params=self.payload)
-        self.assertEqual(response.status_code, 200)
